@@ -303,6 +303,14 @@ class LMBenchmarkWorkload(WorkloadSpec):
         overwrite: bool = False,
         service_account: str = None,
         chat_template: str = None,
+        num_apps: int = 1,
+        users_per_app: int = 1,
+        system_prompt_len: int = 100,
+        rag_doc_len: int = 100,
+        rag_doc_count: int = 10,
+        num_users: int = 10,
+        num_rounds: int = 10,
+        duration: int = 10,
     ):
         self.model_name = model_name
         self.base_url = base_url
@@ -310,6 +318,14 @@ class LMBenchmarkWorkload(WorkloadSpec):
         self.qps_values = qps_values
         self.service_account = service_account
         self.chat_template = chat_template
+        self.num_apps = num_apps
+        self.users_per_app = users_per_app
+        self.system_prompt_len = system_prompt_len
+        self.rag_doc_len = rag_doc_len
+        self.rag_doc_count = rag_doc_count
+        self.num_users = num_users
+        self.num_rounds = num_rounds
+        self.duration = duration
         super().__init__(1, image, pvc_name, overwrite)
 
     @classmethod
@@ -342,6 +358,14 @@ class LMBenchmarkWorkload(WorkloadSpec):
             {"name": "BASE_URL", "value": model_url},
             {"name": "SAVE_FILE_KEY", "value": f"/requests/{folder_name}/LMBench"},
             {"name": "SCENARIOS", "value": self.scenarios},
+            {"name": "NUM_APPS", "value": str(self.num_apps)},
+            {"name": "USERS_PER_APP", "value": str(self.users_per_app)},
+            {"name": "SYSTEM_PROMPT_LEN", "value": str(self.system_prompt_len)},
+            {"name": "RAG_DOC_LEN", "value": str(self.rag_doc_len)},
+            {"name": "RAG_DOC_COUNT", "value": str(self.rag_doc_count)},
+            {"name": "NUM_USERS", "value": str(self.num_users)},
+            {"name": "NUM_ROUNDS", "value": str(self.num_rounds)},
+            {"name": "DURATION", "value": str(self.duration)},
         ]
         
         # Split QPS values and add them as individual environment variables

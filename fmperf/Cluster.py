@@ -437,7 +437,7 @@ class Cluster:
             container_args = [
                 "QPS_VALUES=($(env | grep QPS_VALUES_ | sort -V | cut -d= -f2)); "
                 ". ~/.bashrc && . .venv/bin/activate && "
-                "/app/run_benchmarks.sh \"$MODEL\" \"$BASE_URL\" \"$SAVE_FILE_KEY\" \"$SCENARIOS\" \"${QPS_VALUES[@]}\""
+                "/app/run_benchmarks.sh --model=\"$MODEL\" --base_url=\"$BASE_URL\" --save_file_key=\"$SAVE_FILE_KEY\" --scenarios=\"$SCENARIOS\" --num_apps=\"$NUM_APPS\" --users_per_app=\"$USERS_PER_APP\" --system_prompt_len=\"$SYSTEM_PROMPT_LEN\" --rag_doc_len=\"$RAG_DOC_LEN\" --rag_doc_count=\"$RAG_DOC_COUNT\" --num_users=\"$NUM_USERS\" --num_rounds=\"$NUM_ROUNDS\" --duration=\"$DURATION\" --qps_values=\"${QPS_VALUES[@]}\""
             ]
         else:
             env = [
